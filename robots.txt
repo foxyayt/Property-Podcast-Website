@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Direct link to your sitemap to speed up indexing
-Sitemap: https://sbproperties.uk/sitemap.xml
