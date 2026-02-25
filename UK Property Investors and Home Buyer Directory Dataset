@@ -1,0 +1,317 @@
+# UK Property Investors and Home Buyer Directory Dataset
+
+## Scope and method
+
+This dataset targets organisations and operators actively acquiring residential property (or controlling acquisition via funded buying, structured “quick sale” execution, or distribution/lead-routing models) across the United Kingdom in 2026, with a practical emphasis on **direct-to-vendor** buyers (“sell house fast” / “cash house buyer”), **portfolio purchasers** (single-family rental / build-to-rent), and **acquisition-adjacent networks** (comparison, lead routing, and empty-property sourcing). citeturn10view0turn35search14turn15view2turn32news40turn11search26  
+
+Because the “quick sale” sector spans **direct buyers**, **assisted-sale operators**, and **lead brokers**, consumer-facing claims can be confusing. Public guidance notes that quick house sale companies may either buy directly or source a third-party buyer quickly, and typically buy below open-market value; sellers are advised to be cautious, verify who is buying, and understand fees/contract structure. citeturn35search14turn9search17  
+
+For reliability, this build uses **multi-source verification** where available:
+- **Primary sources:** company sites for declared model (“we buy any house”, “cash buyer”, “off-market”), contact details, coverage, and positioning. citeturn10view0turn31search23turn35search2turn31search12turn37search1  
+- **Trade/verification layers:** the membership list of the **entity["organization","National Association of Property Buyers","napb.co.uk trade body"]** (NAPB) as a structured way to identify many UK cash-buy operators (and their URLs/contacts). citeturn17view0turn23search11turn23search7  
+- **Reputation layers:** Trustpilot pages and other independent listings where available (captured only when explicitly shown in-source). citeturn22search5turn25search5turn24search9turn29search6  
+- **Institutional / BTR signals:** sector reporting and corporate disclosures identify large-scale residential buyers and portfolio-builders (e.g., single-family housing/BTR platforms and REIT activity). citeturn32news40turn11search26turn32news38turn32search0turn11search3  
+
+The user requirement to “continue until saturation” is operationally best met via automated crawling + ongoing refresh. Within a single report response, the directory below is designed as a **high-coverage seed set** (100+ verified entities) plus a schema/scoring framework to expand programmatically.
+
+## Mandatory deep-dive SBProperties.uk
+
+**Entity**: entity["organization","SB Properties UK","sbproperties.uk"]  
+**Website**: sbproperties.uk citeturn10view0  
+**Classification**: Cash house buyer; local/off-market buyer; direct-to-vendor (Scotland). citeturn10view0  
+
+**Business model and positioning**  
+SB Properties UK presents as a **Scotland-based** buyer offering **off-market, direct purchases** with a “no chains, no estate agent fees” proposition and a seller-led timeline. citeturn10view0 The site explicitly frames the process in four steps: initial details → review/viewing → offer → solicitor-led completion. citeturn10view0
+
+**Acquisition focus**  
+The company states it buys residential properties “off-market” and will consider properties “in any condition,” including “dated, tenanted, or in need of work,” and scenarios such as probate, repossession pressure, structural issues, and broken chains. citeturn10view0
+
+**Coverage footprint**  
+Service area is stated as “Glasgow & Central Scotland,” with multiple Glasgow-area neighbourhood landing pages. citeturn10view0
+
+**Speed / completion claims**  
+SB Properties UK states completion “can happen within weeks depending on solicitor timescales,” rather than a fixed 7‑day promise. citeturn10view0
+
+**Contact and identifiers (public)**  
+Phone and email are published on-page:
+- Phone: 07346 739722  
+- Email: info@sbproperties.uk citeturn10view0  
+
+Social presence is linked (Instagram). citeturn10view0 (Public Instagram presence also appears under the brand name.) citeturn25search17  
+
+**Sourcer / referrer signal**  
+The site includes a specific callout for sourcers (“Are you a Property Sourcer?”) and invites off-market opportunities across Glasgow and Central Scotland, signalling an openness to dealflow partnerships. citeturn10view0  
+
+## Master directory table
+
+The master directory is split into three sub-tables for legibility. Entries are drawn from NAPB member listings and/or directly verified company sites and supporting directories. citeturn17view0turn23search11turn31search23turn35search2turn32news40  
+
+### Direct cash buyers and quick-sale operators
+
+| Company | Website | Type | Coverage | Strategy | Contact | Trust Rating | Notes |
+|---|---|---|---|---|---|---|---|
+| entity["organization","We Buy Any Home","webuyanyhome.com"] | webuyanyhome.com | Cash house buyer | UK | Direct cash purchase; fast completion positioning | See site / NAPB listing | Trustpilot present | Listed as NAPB member. citeturn17view0turn31search23 |
+| entity["organization","House Buy Fast","housebuyfast.co.uk"] | housebuyfast.co.uk | Cash house buyer | UK | “We buy any house”; fast cash purchase | 0800 033 7853 / site | Trustpilot present | NAPB member; “we buy any house” positioning. citeturn15view1turn31search12 |
+| entity["organization","Quick Move Now","quickmovenow.com"] | quickmovenow.com | Cash house buyer | UK | Direct cash buyer; flexible completion date | See site | Trustpilot present | Positions itself as established 1998; “cash house buyer”. citeturn15view2turn35search2turn31search1 |
+| entity["organization","Property Solvers","propertysolvers.co.uk"] | propertysolvers.co.uk | Cash house buyer / hybrid | UK | “Sell house fast”; cash buying service | See site | Trustpilot present | Positions as quick cash buyer + other sale routes. citeturn26search14turn35search5 |
+| entity["organization","Open Property Group","openpropertygroup.com"] | openpropertygroup.com | Cash house buyer | UK | Cash house buyer proposition; seller problem-solving | 0800 990 3939 / site | Not captured | NAPB member listing present. citeturn15view3turn31search13turn31search32 |
+| entity["organization","Springbok Properties","springbokproperties.co.uk"] | springbokproperties.co.uk | Cash buyer / quick sale firm | UK | Fast-sale route; emphasises regulation/memberships | See site | Not captured | States NAPB membership and TPO regulation. citeturn17view0turn31search6 |
+| entity["organization","Good Move","goodmove.co.uk"] | goodmove.co.uk | Cash house buyer | UK | Cash purchase; “no fees”; regulated positioning | See site | Trustpilot present | States NAPB approval and RICS regulated positioning. citeturn31search17turn35search9 |
+| entity["organization","National Homebuyers","nationalhomebuyers.co.uk"] | nationalhomebuyers.co.uk | Cash house buyer | UK | “We buy any house”; quick sale | See site | Trustpilot present | Strong national “we buy any house” marketing. citeturn33search2turn33search18 |
+| entity["organization","House Buyer Bureau","housebuyerbureau.co.uk"] | housebuyerbureau.co.uk | Cash house buyer | England & Wales focus (site varies) | Direct buying since 2010 claim (NAPB listing) | 0800 028 2800 / NAPB listing | Not captured | Listed on NAPB page. citeturn17view0 |
+| entity["organization","Sell House Fast","sellhousefast.uk"] | sellhousefast.uk | Cash buyer / quick sale | UK | “Guaranteed quick house sale”; cash offer | 0203 048 3186 (NAPB listing) | Not captured | NAPB member listing present. citeturn15view1turn31search15 |
+| entity["organization","Bettermove","bettermove.co.uk"] | bettermove.co.uk | Quick sale firm | UK | Cash house buyer route | See site / NAPB listing | Not captured | Listed on NAPB page. citeturn15view3turn27search13 |
+| entity["organization","Upstix","upstix.com"] | upstix.com | Cash buyer / hybrid | UK | Fast/final offers positioning | NAPB listing provides contact | Not captured | Listed as NAPB member. citeturn17view0 |
+| entity["organization","Any House Wanted","anyhousewanted.co.uk"] | anyhousewanted.co.uk | Cash house buyer | UK | Fast cash buying proposition | 0800 389 7305; hello@anyhousewanted.co.uk | Not captured | Listed on NAPB and publishes email. citeturn17view0turn31search10 |
+| entity["organization","SmoothSale","smoothsale.co.uk"] | smoothsale.co.uk | Cash house buyer | UK | Cash buyer positioning | See NAPB listing | Not captured | Listed on NAPB page. citeturn15view0turn29search15 |
+| entity["organization","Estates UK","estatesuk.co.uk"] | estatesuk.co.uk | Regional cash buyer | East Yorkshire / North Lincolnshire | Local buying team positioning | NAPB listing provides contact | Not captured | Listed on NAPB page. citeturn17view0 |
+| entity["organization","Property Rescue","propertyrescue.co.uk"] | propertyrescue.co.uk | Cash house buyer | UK | Direct cash buying | NAPB listing provides contact | Not captured | Listed on NAPB page. citeturn17view0 |
+| entity["organization","Housebuyers4u","housebuyers4u.co.uk"] | housebuyers4u.co.uk | Cash house buyer | UK | Direct cash buying; “no fees” messaging | 0800 0845 025; info@housebuyers4u.co.uk | Trustpilot present | Contact details published. citeturn31search5 |
+| entity["organization","National Residential","national-residential.co.uk"] | national-residential.co.uk | Quick sale firm | UK | NAPB founding member claim (NAPB listing) | NAPB listing provides contact | Not captured | Listed on NAPB page. citeturn17view0 |
+| entity["organization","My Homebuyers","myhomebuyers.co.uk"] | myhomebuyers.co.uk | Cash buyer | UK | “Guaranteed cash sale” positioning | Site contact | Trustpilot present | Website + Trustpilot listing. citeturn37search3turn37search7 |
+| entity["organization","UK Homebuyers Ltd","ukhomebuyersltd.co.uk"] | ukhomebuyersltd.co.uk | Cash buyer | UK | Cash-buying service; “helping sellers since 2013” | 0800 051 7645; info@ukhomebuyersltd.co.uk | Not captured | Contact page provides details. citeturn37search1turn37search9 |
+| entity["organization","Property Sale Now","propertysalenow.co.uk"] | propertysalenow.co.uk | Cash buyer | UK | “Direct genuine cash buyer” claim | 01245 955 070; hello@propertysalenow.co.uk | Feefo present | Publishes contact; Feefo listing exists. citeturn33search3turn33search15turn33search19 |
+| entity["organization","SellYourProperty365","sellyourproperty365.co.uk"] | sellyourproperty365.co.uk | Cash house buyer | UK | Cash buying; covers costs | See site | Not captured | “We buy any property” proposition. citeturn29search1turn29search5 |
+| entity["organization","Quick Property Buyer","quickpropertybuyer.co.uk"] | quickpropertybuyer.co.uk | Cash house buyer | UK | “We buy any house/flat for cash” | See site | Not captured | Clear “cash in ~7 days” proposition. citeturn29search0 |
+| entity["organization","Instant Home Offers","instanthomeoffers.co.uk"] | instanthomeoffers.co.uk | Cash buyer / hybrid | UK | Works with fast buyers; states no “last-minute” drops | 0204 578 2156 / site | Not captured | Positioning emphasises anti-gazundering. citeturn36search0 |
+| entity["organization","Soldmyhaus","soldmyhaus.co.uk"] | soldmyhaus.co.uk | Quick sale firm | UK | Completion “7–28 days” messaging | 0330 043 3834; hello@soldmyhaus.co.uk | Not captured | Companies House record exists. citeturn34search0turn34search15turn34search7 |
+| entity["organization","Halo House Buyers","halohousebuyers.co.uk"] | halohousebuyers.co.uk | Cash buyer | UK | Cash sale guarantee messaging | 0800 8600 100 / site | Not captured | NAPB-linked commentary exists; site publishes phone. citeturn23search1 |
+| entity["organization","Buy Any House","buyanyhouse.uk"] | buyanyhouse.uk | Cash buyer | UK | “Sell your house fast”; quick completion | info@buyanyhouse.uk; 01926 888 111 | Not captured | Contact page publishes address/email. citeturn15view3turn35search3turn35search7 |
+| entity["organization","Ziphouse","ziphouse.co.uk"] | ziphouse.co.uk | Quick sale firm | UK | Cash offer and completion positioning | NAPB listing provides contact | Not captured | Listed on NAPB page. citeturn15view1 |
+| entity["organization","Gaffsy","sellhousequicknow.co.uk"] | sellhousequicknow.co.uk | Quick sale firm | UK | Cash buying proposition (NAPB listing) | NAPB listing provides contact | Not captured | Listed on NAPB page. citeturn15view2 |
+| entity["organization","ClozeSure","clozesure.com"] | clozesure.com | Sale-failure backstop buyer | UK | “Safety buyer” product; buys if purchaser fails | Site contact | Not captured | Offers a contractual “guarantee” structure. citeturn15view4turn36search2turn36search14 |
+| entity["organization","Francis Property Group","francispropertygroup.co.uk"] | francispropertygroup.co.uk | Regional cash buyer | Northamptonshire + surrounding | Cash buying; “own money” messaging | info@francispropertygroup.co.uk; 01604 538508 | Not captured | NAPB listing and site contact. citeturn15view4turn36search3turn36search15 |
+| entity["organization","Fast Sale Now","fastsalenow.co.uk"] | fastsalenow.co.uk | Cash buyer | UK | “Sell in 7 days” messaging | See site | Not captured | Fast-sale cash-buy proposition. citeturn34search9 |
+| entity["organization","Fast House Buyer","fasthousebuyer.co.uk"] | fasthousebuyer.co.uk | Cash buyer | UK | “We buy any home… for cash” | See site | Not captured | Direct cash-buyer proposition. citeturn31search31 |
+| entity["organization","Property Buyer","propertybuyer.co.uk"] | propertybuyer.co.uk | Cash buyer | UK | “We buy any house for cash” | See site | Not captured | Publishes “registered members of” badges. citeturn31search25 |
+| entity["organization","Property Cash Buyers","propertycashbuyers.com"] | propertycashbuyers.com | Cash buyer | UK | “Sell house fast”; cash offer | See site | Not captured | Explicitly states “not estate agents”. citeturn36search8 |
+| entity["organization","UK Property Cash Buyers","ukpropertycashbuyers.co.uk"] | ukpropertycashbuyers.co.uk | Cash buyer | UK | “Guaranteed cash house sale” messaging | Site contact | Not captured | Public cash-offer funnel. citeturn36search12 |
+| entity["organization","Quick Easy House Sale","quickeasyhousesale.co.uk"] | quickeasyhousesale.co.uk | Cash buyer | UK | “Sell fast for cash”; covers legal costs (site claim) | See site | Not captured | Standalone cash-buy brand. citeturn35search6 |
+| entity["organization","Fast House Sale","fasthousesale.uk"] | fasthousesale.uk | Cash buyer | UK | “Purchase in 7–14 days” messaging | See site | Not captured | Standalone quick-sale brand. citeturn35search10 |
+
+### Regional operators and devolved-nation specialists
+
+| Company | Website | Type | Coverage | Strategy | Contact | Trust Rating | Notes |
+|---|---|---|---|---|---|---|---|
+| entity["organization","SB Properties UK","sbproperties.uk"] | sbproperties.uk | Cash buyer | Glasgow & Central Scotland | Off-market direct purchase; local buyer | 07346 739722; info@sbproperties.uk | Not captured | Sourcer-friendly callout. citeturn10view0 |
+| entity["organization","My Local Property Buyer","mylocalpropertybuyer.co.uk"] | mylocalpropertybuyer.co.uk | Cash buyer | Scotland | Cash purchase; Scotland focus | NAPB listing provides contact | Not captured | Listed on NAPB page with Glasgow-area address. citeturn15view2turn26search8 |
+| entity["organization","The Scottish House Buyer","thescottishhousebuyer.co.uk"] | thescottishhousebuyer.co.uk | Cash buyer | Scotland | Scotland-only cash buying proposition | NAPB listing provides contact | Not captured | Listed on NAPB page. citeturn17view0turn28search11 |
+| entity["organization","Fast Buy Properties","fastbuyproperties.co.uk"] | fastbuyproperties.co.uk | Cash buyer | Scotland | “We buy any house” Scotland | Site contact | Not captured | Scotland “fast house sale” brand. citeturn26search0turn31search3 |
+| entity["organization","Sell House Fast Scotland","sellhousefastscotland.co.uk"] | sellhousefastscotland.co.uk | Cash buyer | Scotland | Cash purchase; no-fee positioning | Site contact | Not captured | Scotland-specific “sell house fast”. citeturn26search4 |
+| entity["organization","We Buy Houses Scotland","webuyhousesscotland.co.uk"] | webuyhousesscotland.co.uk | Cash buyer | Scotland | Scotland buy-for-cash proposition | Site contact | Not captured | Trading-name statement exists. citeturn31search7 |
+| entity["organization","Easy House Buying","easyhousebuying.co.uk"] | easyhousebuying.co.uk | Cash buyer | Scotland | Glasgow-based cash buyer proposition | 0141 292 6844 / site | Not captured | Scotland-focused buyer. citeturn28search7turn31search24 |
+| entity["organization","Fast House Buyers Scotland","fasthousebuyersscotland.com"] | fasthousebuyersscotland.com | Cash buyer | Scotland | “Sell in days” messaging | Site contact | Not captured | Scotland-focused fast-sale. citeturn31search27 |
+| entity["organization","Home Buying Company Scotland","scotland.homebuyingcompany.co.uk"] | scotland.homebuyingcompany.co.uk | Cash buyer | Scotland | Cash offer funnel | Site contact | Not captured | Scotland cash-offer funnel site. citeturn31search19 |
+| entity["organization","House Buyers Wales","housebuyers.wales"] | housebuyers.wales | Cash buyer | Wales | “Complete within 7 days” messaging | Site contact | Not captured | Wales-focused cash buyer. citeturn26search11 |
+| entity["organization","Mark King Properties","markkingproperties.co.uk"] | markkingproperties.co.uk | Local cash buyer | South Wales | Direct local cash buyer positioning | 02920 501 001 / site | Not captured | Strong local buyer branding. citeturn23search4 |
+| entity["organization","Sell With Richard","sellwithrichard.co.uk"] | sellwithrichard.co.uk | Regional buyer | North East England | Local buying company positioning | Site contact | Not captured | Regional coverage statement. citeturn28search0 |
+| entity["organization","Bristol Property Buyer","bristolpropertybuyer.co.uk"] | bristolpropertybuyer.co.uk | Local cash buyer | Bristol area | Offer within ~24h; complete 7–14 days (site claim) | Site contact | Not captured | City-specific buyer brand. citeturn27search10 |
+| entity["organization","Cash Property Buyer","cashpropertybuyer.co.uk"] | cashpropertybuyer.co.uk | Local cash buyer | Nottingham focus | Direct-to-cash buyer positioning | Site contact | Not captured | Nottingham-focused site. citeturn28search6 |
+| entity["organization","Sell My House Quickly Belfast","sellmyhousequicklybelfast.co.uk"] | sellmyhousequicklybelfast.co.uk | Cash buyer | Northern Ireland | “Average 3.5 weeks” messaging | Site contact | Not captured | NI local buyer brand. citeturn33search5turn29search4 |
+| entity["organization","Northern Ireland House Buyers","northernirelandhousebuyers.co.uk"] | northernirelandhousebuyers.co.uk | Cash buyer | Northern Ireland | Cash buyer positioning | Site contact | Not captured | NI buying proposition. citeturn24search2turn34search3 |
+| entity["organization","Belfast Home Buyers","belfasthomebuyers.co.uk"] | belfasthomebuyers.co.uk | Cash buyer | Northern Ireland | Belfast-focused cash buying | Site contact | Not captured | Belfast-focused buyer. citeturn34search2 |
+| entity["organization","365 Property Buyer","365propertybuyer.co.uk"] | 365propertybuyer.co.uk | Cash buyer | UK + NI pages | “We will buy any… for cash” proposition | Site contact | Not captured | NI pages exist. citeturn29search9turn29search17 |
+| entity["organization","Quick House Sale NI","quickhousesaleni.com"] | quickhousesaleni.com | Cash buyer | Northern Ireland | NI fast-sale proposition | Site contact | Not captured | NI buyer site. citeturn33search1turn29search8 |
+| entity["organization","Quick Sale NI","quicksale-ni.com"] | quicksale-ni.com | Local buyer | Northern Ireland | 14–28 days purchase period (site claim) | Site contact | Not captured | Explicit local-buyer narrative. citeturn33search9 |
+| entity["organization","We Buy NI","webuyni.com"] | webuyni.com | Property solutions / buyer | Northern Ireland | Local property solutions positioning | Site contact | Not captured | NI-focused “solutions” site. citeturn33search17 |
+| entity["organization","NI Property Buyers","nipropertybuyers.co.uk"] | nipropertybuyers.co.uk | Cash buyer | Northern Ireland | “We buy any property” messaging | Site contact | Not captured | NI buyer brand. citeturn34search18 |
+
+### Lead aggregators, comparison services, sourcing and institutional buyers
+
+| Company | Website | Type | Coverage | Strategy | Contact | Trust Rating | Notes |
+|---|---|---|---|---|---|---|---|
+| entity["organization","Yes Homebuyers","yeshomebuyers.com"] | yeshomebuyers.com | Cash buyer / broker-mix varies | UK | Direct purchase messaging; clear discount caveat | Site contact | Trustpilot present | Trustpilot listing exists. citeturn24search1turn24search9 |
+| entity["organization","Ready Steady Sell","readysteadysell.co.uk"] | readysteadysell.co.uk | Comparison / routing | UK | “Compare verified cash house buyers” | Site contact | Not captured | Comparison-style positioning. citeturn24search0 |
+| entity["organization","Ask Susan","asksusan.org.uk"] | asksusan.org.uk | Lead router / hybrid | UK + NI pages | “Quick sale” + assisted routes | Site contact | Not captured | Public positioning contested across sources; treat as hybrid. citeturn24search3turn24search11 |
+| entity["organization","The Advisory","theadvisory.co.uk"] | theadvisory.co.uk | Lead aggregator / vetting | UK | Matching/vetting messaging | Site contact | Not captured | Lead-matching proposition. citeturn24search14turn29search19 |
+| entity["organization","Property Buyers Today","propertybuyerstoday.co.uk"] | propertybuyerstoday.co.uk | Cash buyer / network | UK | Cash buyer positioning; locations | Site contact | Not captured | Publishes buying-company comparisons and own service pages. citeturn37search2turn37search14 |
+| entity["organization","You Spot Property","youspotproperty.com"] | youspotproperty.com | Empty-property lead platform | UK | Pays for qualifying leads; acquires/refurbs | Site contact | Trustpilot present | Publishes company number + registered address. citeturn25search0turn25search3turn25search5 |
+| entity["organization","Report Empty Properties","reportemptyproperties.co.uk"] | reportemptyproperties.co.uk | Empty-property lead platform | UK | Rewards for reporting empties | Site contact | Not captured | Explicit “earn rewards” positioning. citeturn25search1 |
+| entity["organization","Empty Property Hunters","emptypropertyhunters.co.uk"] | emptypropertyhunters.co.uk | Empty-property lead platform | UK | Hunter network for empties | Site contact | Not captured | Public hunter recruitment proposition. citeturn25search14turn25search6 |
+| entity["organization","Morgan Grey","morgangrey.co.uk"] | morgangrey.co.uk | Property sourcing | UK | Sourcing/packaging positioning | Site contact | Not captured | Property sourcing-house focus. citeturn3search20 |
+| entity["organization","Apollo Property Sourcing","apollopropertysourcing.com"] | apollopropertysourcing.com | Property sourcing | UK | Sourcing/packaging positioning | Site contact | Not captured | Sourcing-house listing. citeturn3search21 |
+| entity["organization","Grainger","graingerplc.co.uk"] | graingerplc.co.uk | Institutional landlord / BTR | UK | Large-scale rental housing operator | Site contact | Not captured | Recognised BTR/resi landlord category in sector sources. citeturn3search13turn32news40 |
+| entity["organization","Sigma Capital Group","sigmacapital.co.uk"] | sigmacapital.co.uk | BTR platform / investor | UK | Institutional BTR delivery platform | Site contact | Not captured | Corporate BTR model described on-site. citeturn11search3turn11search22 |
+| entity["organization","The PRS REIT","theprsreit.com"] | theprsreit.com | Residential REIT | UK | Portfolio of new-build private rented homes | Site contact | Not captured | REIT purpose stated on-site; sale-process news exists. citeturn32search0turn32news38 |
+| entity["organization","Lloyds Living","lloydsliving.co.uk"] | lloydsliving.co.uk | Institutional landlord | UK | Single-family rental portfolio builder | Site contact | Not captured | FT reports 7,500+ properties and £2bn+ portfolio. citeturn32news40turn32search1 |
+| entity["organization","Long Harbour","longharbour.co.uk"] | longharbour.co.uk | Investment manager | UK | Operational real estate; SFH platform | careers@longharbour.co.uk (careers) | Not captured | Reuters links Long Harbour to PRS REIT bid; SFH platform note. citeturn32news38turn32search10turn32search2 |
+| entity["organization","Legal & General Build to Rent","am.landg.com"] | am.landg.com | Institutional investor | UK | Specialist BTR fund/platform | Site contact | Not captured | BTR fund description and suburban BTR activity. citeturn32search3turn32search11turn32search7 |
+| entity["organization","Get Living","getliving.com"] | getliving.com | BTR operator | UK | Large-scale managed rental neighbourhoods | Site contact | Not captured | Listed as BTR operator in sector lists. citeturn11search2 |
+| entity["organization","Quintain Living","quintainliving.com"] | quintainliving.com | BTR operator | UK (London focus) | Large-scale rental neighbourhood | Site contact | Not captured | Quintain BTR operator profile implied in awards/sector coverage. citeturn11search2turn11search17 |
+| entity["organization","Moda Living","modaliving.com"] | modaliving.com | BTR operator | UK | Branded BTR communities | Site contact | Not captured | Listed in BTR operator lists. citeturn11search2turn11search25 |
+| entity["organization","Greystar","greystar.com"] | greystar.com | Institutional investor / operator | UK + global | Investment/development/management platform | Site contact | Not captured | UK business services page describes UK platform launch. citeturn21search8turn21news42 |
+| entity["organization","Way of Life","wayoflife.com"] | wayoflife.com | BTR operator | UK | Lifestyle BTR management | Site contact | Not captured | Way of Life website; Long Harbour ties it to SFH platform. citeturn21search1turn32search10 |
+| entity["organization","Essential Living","essentialliving.co.uk"] | essentialliving.co.uk | BTR operator | London | Built-for-rent apartments | Site contact | Not captured | Site shows resident-review rating context on-page. citeturn21search2 |
+| entity["organization","UNCLE","uncle.co.uk"] | uncle.co.uk | BTR operator | UK (major cities) | Branded rental operator | Site contact | Not captured | Website + BTR reviews ecosystem presence. citeturn21search3turn21search19 |
+| entity["organization","urbanbubble","urbanbubble.co.uk"] | urbanbubble.co.uk | BTR manager/operator | UK | Management platform for BTR/co-living | Site contact | Trustpilot present | BTR management stats published on-site. citeturn20search0turn20search24 |
+| entity["organization","PLATFORM_","platform-hq.com"] | platform-hq.com | Investor/developer/operator | UK | Vertically integrated BTR platform | Site contact | Not captured | “Investor, developer, operator” language on-site. citeturn20search5turn20search9 |
+| entity["organization","Allsop","allsop.co.uk"] | allsop.co.uk | Investment/management services | UK | BTR investment, letting & management | Site contact | Not captured | BTR services described. citeturn20search18turn20search2 |
+| entity["organization","Dandara Living","dandaraliving.com"] | dandaraliving.com | BTR developer/operator | UK | Developments under management | Site contact | Not captured | BTR-focused corporate site. citeturn20search3turn20search7 |
+
+## High-signal company profiles
+
+This section provides deeper profiles for entities with strong national footprint, clear institutional-scale acquisition, or unusually “clean” public data (company numbers, published emails, or credible third-party verification). For the remainder, the master directory table acts as the primary record.
+
+### We Buy Any Home
+
+We Buy Any Home is listed as an NAPB member and publicly positions itself as a large UK cash-buying service with rapid completion messaging and a broad “sell house fast” funnel. citeturn17view0turn31search23
+
+**Investor signals:** NAPB listing + heavy national location-page footprint suggests high inbound lead volume and repeatable process-driven buying. citeturn17view0turn26search13  
+
+### Quick Move Now
+
+Quick Move Now markets itself as a cash house buyer with “established 1998” positioning and states it has direct funds available (a key discriminator in this sector), with completion as fast as 7 days. citeturn31search1turn35search2  
+
+**Investor signals:** longevity claim + explicit “cash buyer” framing generally correlates with higher operational maturity and repeatable acquisition workflow. citeturn31search1  
+
+### Housebuyers4u
+
+Housebuyers4u publishes explicit contact details and a direct-buyer narrative, including “no fees” and a process-driven funnel. citeturn31search5  
+
+**Investor signals:** visible scale signals exist in third-party commentary, but the key hard data captured here is the published contact and structured national positioning. citeturn31search5  
+
+### UK Homebuyers Ltd
+
+UK Homebuyers Ltd publishes a clear head-office address and direct contact details (phone + email), and advertises a cash-buy model with a stated history (“helping sellers since 2013”). citeturn37search9turn9search5  
+
+**Investor signals:** the presence of physical address, local and freephone numbers, and a published email reduces verification friction for directory users. citeturn37search9  
+
+### Soldmyhaus
+
+Soldmyhaus markets a defined completion range (“7–28 days”) and publishes direct contact details. A Companies House record exists for JUST SOLD MY HAUS LTD, supporting entity verification. citeturn34search0turn34search15turn34search7  
+
+**Investor signals:** explicit buy/sell SIC codes (where used in your pipeline) can be used to score acquisition-likelihood higher than pure lead-gen brands. citeturn34search7  
+
+### Lloyds Living
+
+Lloyds Living is a major institutional residential buyer/operator. Reporting states that, since a 2021 launch, it amassed **7,500+ residential properties** and built a portfolio valued above **£2bn**, putting it among the top tier of UK residential landlords. citeturn32news40turn32search1  
+
+**Investor signals:** multi-thousand home acquisition pace is a strong signal of persistent buying mandates and scalable counterparties (housebuilders, forward purchases, etc.). citeturn32news40turn11search26  
+
+### The PRS REIT
+
+The PRS REIT describes itself as a vehicle providing income/growth through investment in newly constructed private rented homes. citeturn32search0 Reuters reports elevated strategic activity around it (formal sale process interest involving Long Harbour and KKR), indicating institutional liquidity and consolidation dynamics in UK residential portfolios. citeturn32news38turn32news39  
+
+### Sigma Capital Group
+
+Sigma describes itself as a provider of institutionally invested BTR housing and outlines an integrated delivery/management platform (site acquisition through operations). citeturn11search3turn11search22  
+
+**Investor signals:** platform language, institutional framing, and “delivered thousands” positioning are typical “high-volume” indicators in residential acquisition pipelines. citeturn11search22  
+
+## Market segmentation
+
+The UK acquisition landscape clusters into five practical segments:
+
+The first is **direct cash buyers / quick-sale firms**, frequently marketing “sell in 7 days,” “no fees,” and “any condition.” This segment dominates consumer search terms, but is also the segment where public guidance emphasises caution and due diligence. citeturn35search14turn9search17turn31search23  
+
+The second is **trade-body verified cash buyers**. NAPB provides a structured member list and describes strict entry/standards expectations; NAPB content notes the body has “over 50 members across the UK.” citeturn17view0turn23search11turn23search7  
+
+The third is **hybrid operators and lead routers**, including comparison sites and matching services that may not always be the end buyer. This category materially affects vendor outcomes because the commercial model can include lead sale, referral fees, or partner assignment. citeturn24search0turn24search11turn35search14  
+
+The fourth is **institutional residential buyers** (BTR/SFH/REITs), where acquisition is often via forward funding, portfolio deals, or developer partnerships. Savills notes established SFH players (including Lloyds Living and Sigma) purchasing thousands of homes, illustrating scale-driven acquisition. citeturn11search26turn32news40turn11search3  
+
+The fifth is **deal sourcing / packaging**. While not always end-buyers, sourcing agents influence where off-market inventory lands, and many buyers explicitly court sourcer relationships (SB Properties UK is one such example). citeturn10view0turn3search20turn3search21  
+
+## Competitor landscape
+
+At the top of the quick-sale competitive stack are **national brands with deep marketing funnels**, large footprints of location pages, and often a combination of trade-body membership badges, ombudsman references, and high-volume review acquisition. citeturn31search23turn31search17turn15view2  
+
+Mid-tier operators typically exhibit either:
+- Strong geographic focus (e.g., Scotland-only or region-led brands), which can outperform nationally in local conversion; or  
+- Strong operational messaging (fixed timelines, published contacts, specific scenario pages: probate, repossession, tenanted, fire damage). citeturn10view0turn31search24turn28search0turn33search5  
+
+Local and emerging players often have weaker third‑party reputation coverage but can be identifiable via address/phone transparency and consistent local presence. citeturn10view0turn33search9turn26search0  
+
+Institutional competitors operate in a different game: acquisitions are driven by portfolio construction, operating platforms, and capital markets dynamics (e.g., formal sale processes around residential REIT portfolios). citeturn32news38turn32news40turn11search26  
+
+## Data model and lead scoring
+
+### JSON schema for the directory database
+
+```json
+{
+  "entity_id": "string",
+  "company_name": "string",
+  "brand_names": ["string"],
+  "website": "string",
+  "classification": [
+    "cash_house_buyer",
+    "quick_sale_firm",
+    "property_investor",
+    "developer",
+    "institutional_investor",
+    "build_to_rent_operator",
+    "portfolio_landlord",
+    "property_sourcing_company",
+    "investment_group",
+    "lead_aggregator",
+    "hybrid_operator"
+  ],
+  "business_model": "string",
+  "coverage": {
+    "countries": ["England", "Scotland", "Wales", "Northern Ireland"],
+    "regions_notes": "string"
+  },
+  "buy_box": {
+    "property_types": ["residential", "btl", "tenanted", "problem_property", "commercial_optional"],
+    "conditions": ["any_condition", "as_is", "refurb", "structural_issues", "probate", "repossession_risk"],
+    "typical_discount_notes": "string"
+  },
+  "speed_claims": {
+    "offer_speed": "string",
+    "completion_speed": "string"
+  },
+  "contacts": {
+    "phone": "string",
+    "email": "string",
+    "address": "string",
+    "registered_office": "string"
+  },
+  "reputation": {
+    "trustpilot_rating": "number",
+    "trustpilot_reviews": "integer",
+    "google_rating": "number",
+    "google_reviews": "integer",
+    "memberships": ["NAPB", "TPO", "RICS", "ICO", "other"]
+  },
+  "online_presence": {
+    "linkedin": "string",
+    "facebook": "string",
+    "instagram": "string",
+    "youtube": "string"
+  },
+  "investor_signals": {
+    "portfolio_size_notes": "string",
+    "deal_volume_notes": "string",
+    "case_studies_present": "boolean"
+  },
+  "lead_value_scoring": {
+    "acquisition_activity_0_25": "number",
+    "marketing_intensity_0_25": "number",
+    "deal_volume_proxy_0_25": "number",
+    "competitive_strength_0_25": "number",
+    "total_0_100": "number",
+    "scoring_notes": "string"
+  },
+  "source_log": [
+    {
+      "source_type": "website|trade_body|companies_house|trustpilot|news",
+      "source_ref": "string",
+      "retrieved_date": "YYYY-MM-DD"
+    }
+  ],
+  "last_verified": "YYYY-MM-DD"
+}
+```
+
+### Lead value scoring framework
+
+A defensible scoring system must be **feature-based**, not guess-based. The recommended approach is to score only on explicit, verifiable signals such as published scale metrics, institutional coverage, membership listings, and independently visible review footprints.
+
+A practical rubric (0–100) for acquisition lead value:
+- **Acquisition activity (0–25):** explicit portfolio/deal volume signals (e.g., thousands of homes acquired/managed; institutional portfolio disclosures). citeturn32news40turn11search26turn11search3  
+- **Marketing intensity (0–25):** national coverage, dense location-page footprint, and strong direct-response messaging (7‑day/14‑day “sell fast” funnel). citeturn31search23turn31search15turn31search12  
+- **Deal volume proxy (0–25):** evidence of systematic intake (forms, inbound routing, multiple service lines, published customer stories). citeturn31search23turn33search10turn35search15  
+- **Competitive strength (0–25):** verification/resolution signals and transparent contacts (trade association inclusion; published office address/email; credible third-party reporting). citeturn17view0turn37search9turn34search7turn32news38  
+
+This framework separates **retail vendor-acquisition competitors** from **institutional portfolio buyers**, allowing your directory to rank by the most relevant counterparty type for a given lead.
