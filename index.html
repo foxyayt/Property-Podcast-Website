@@ -1192,8 +1192,23 @@
 
       const proxies = [
         {
+          name: "codetabs",
+          url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssUrl)}`,
+          parser: async (res) => parseYouTubeFeedXml(await res.text())
+        },
+        {
+          name: "corsproxy",
+          url: `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
+          parser: async (res) => parseYouTubeFeedXml(await res.text())
+        },
+        {
+          name: "allorigins_raw",
+          url: `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`,
+          parser: async (res) => parseYouTubeFeedXml(await res.text())
+        },
+        {
           name: "rss2json",
-          url: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=25`,
+          url: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`,
           parser: async (res) => {
             const data = await res.json();
             if (data.status !== "ok" || !Array.isArray(data.items)) throw new Error("rss2json bad response");
@@ -1205,11 +1220,6 @@
           }
         },
         {
-          name: "allorigins_raw",
-          url: `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`,
-          parser: async (res) => parseYouTubeFeedXml(await res.text())
-        },
-        {
           name: "allorigins_get",
           url: `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`,
           parser: async (res) => {
@@ -1217,16 +1227,6 @@
             if (!data.contents) throw new Error("allorigins get empty");
             return parseYouTubeFeedXml(data.contents);
           }
-        },
-        {
-          name: "corsproxy",
-          url: `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
-          parser: async (res) => parseYouTubeFeedXml(await res.text())
-        },
-        {
-          name: "codetabs",
-          url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssUrl)}`,
-          parser: async (res) => parseYouTubeFeedXml(await res.text())
         }
       ];
 
