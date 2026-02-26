@@ -19,7 +19,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "list",
+          "urls": ["index.html", "blog.html"]
+        }
+      ]
+    }
+    </script>
 
     <meta name="description"
         content="A comprehensive, searchable directory of verified UK property investors, cash buyers, and institutional landlords. Featuring local experts and national operators." />
@@ -243,6 +259,8 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            min-height: 380px;
+            contain: layout style paint;
         }
 
         .company-card:hover {
@@ -403,6 +421,8 @@
             width: 100%;
             height: 450px;
             background: #111;
+            content-visibility: auto;
+            contain-intrinsic-size: 100% 450px;
         }
 
         .map-container iframe {

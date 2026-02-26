@@ -19,7 +19,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "list",
+          "urls": ["index.html", "article-renters-rights-2026.html", "article-manchester-liverpool-2026.html", "article-finance-epc-2026.html", "article-epc-roadmap-2030.html"]
+        }
+      ]
+    }
+    </script>
 
     <meta name="description"
         content="In-depth analysis and expert guides on the 2026 UK property market, Renters' Rights Act, and high-yield investment strategies." />
@@ -256,6 +272,8 @@
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            min-height: 450px;
+            contain: layout style paint;
         }
 
         .blog-card:hover {
@@ -391,7 +409,8 @@
             <article class="featured-card">
                 <div class="featured-img" style="position: relative;">
                     <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80"
-                        alt="UK Housing Market 2026">
+                        alt="UK Housing Market 2026" width="1200" height="675" fetchpriority="high" loading="eager"
+                        style="aspect-ratio: 16 / 9;">
                     <div
                         style="position: absolute; top: 1rem; left: 1rem; background: var(--error); color: white; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 800; font-size: 0.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
                         67 DAYS TO MAY 1st DEADLINE

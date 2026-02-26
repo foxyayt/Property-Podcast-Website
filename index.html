@@ -19,7 +19,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet">
+  </noscript>
 
   <meta name="description"
     content="The ultimate real-time directory for UK property investment. Tracking 50+ channels on HMOs, BTL, and regeneration hotspots in Manchester, Birmingham, and Liverpool." />
@@ -66,6 +71,18 @@
         }
       ]
     }
+  }
+  </script>
+
+  <!-- Speculation Rules API: Instantaneous Pre-rendering -->
+  <script type="speculationrules">
+  {
+    "prerender": [
+      {
+        "source": "list",
+        "urls": ["directory.html", "blog.html"]
+      }
+    ]
   }
   </script>
 
@@ -219,6 +236,8 @@
       display: flex;
       flex-direction: column;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      min-height: 400px;
+      contain: layout style paint;
     }
 
     .channel-card:hover {
@@ -426,6 +445,9 @@
       border-radius: 8px;
       padding: 0.75rem;
       cursor: pointer;
+      width: 280px;
+      height: 200px;
+      contain: layout style paint;
     }
 
     .latest-item:hover {
@@ -764,7 +786,8 @@
       <div class="title-area">
         <div style="display: flex; align-items: center; gap: 1rem;">
           <div class="logo-wrapper" style="width: 48px; height: 48px; flex-shrink: 0;">
-            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;"
+              aria-hidden="true">
               <path d="M4 22 C 8 10, 24 10, 28 22 L 28 26 C 24 16, 8 16, 4 26 Z" fill="var(--accent)" />
               <rect x="14" y="24" width="4" height="4" fill="var(--accent)" opacity="0.6" />
             </svg>
@@ -1014,6 +1037,21 @@
       };
     }
 
+    // RAF rendering throttling to prevent layout thrashing
+    const rafRender = (fn) => {
+      let rafId;
+      return (...args) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => fn(...args));
+      };
+    };
+
+    const throttledRender = rafRender(() => render());
+    const throttledRenderLatest = rafRender(() => {
+      renderLatest();
+      renderShorts();
+    });
+
     function getYouTubeIdFromUrl(url) {
       if (!url) return "";
       const u = String(url).trim();
@@ -1189,6 +1227,24 @@
 
     async function fetchFeed(channel) {
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channel.channelId}`;
+      const CACHE_KEY = `feed_${channel.channelId}`;
+      const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+      // Check Cache (Antigravity Phase 3: Orbit)
+      try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const { data, ts } = JSON.parse(cached);
+          if (Date.now() - ts < CACHE_TTL) {
+            channel.videos = data.videos;
+            channel.shorts = data.shorts;
+            channel.status = "Latest uploads (cached)";
+            channel.isError = false;
+            updateGlobalLatest(channel);
+            return;
+          }
+        }
+      } catch (_) { }
 
       const proxies = [
         {
@@ -1205,27 +1261,13 @@
           }
         },
         {
-          name: "allorigins_raw",
-          url: `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`,
-          parser: async (res) => parseYouTubeFeedXml(await res.text())
-        },
-        {
-          name: "allorigins_get",
-          url: `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`,
-          parser: async (res) => {
-            const data = await res.json();
-            if (!data.contents) throw new Error("allorigins get empty");
-            return parseYouTubeFeedXml(data.contents);
-          }
-        },
-        {
           name: "corsproxy",
           url: `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
           parser: async (res) => parseYouTubeFeedXml(await res.text())
         },
         {
-          name: "codetabs",
-          url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssUrl)}`,
+          name: "allorigins_raw",
+          url: `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`,
           parser: async (res) => parseYouTubeFeedXml(await res.text())
         }
       ];
@@ -1235,7 +1277,7 @@
 
       for (const proxy of proxies) {
         try {
-          const response = await fetchWithTimeout(proxy.url);
+          const response = await fetchWithTimeout(proxy.url, 8000); // 8s timeout per proxy
           if (!response.ok) continue;
 
           let videos = await proxy.parser(response);
@@ -1244,14 +1286,7 @@
           const categorized = (videos || []).reduce((acc, v) => {
             if (!v || !v.id || v.id.length < 5) return acc;
             const t = (v.title || "").toLowerCase();
-            // Robust check: title markers + vertical length indicators (YouTube usually tags them)
-            const isShort = t.includes("#shorts") ||
-              t.includes("#short") ||
-              t.includes("tiktok") ||
-              t.includes("reel") ||
-              t.includes("reels") ||
-              t.includes("youtube shorts");
-
+            const isShort = t.includes("#shorts") || t.includes("#short") || t.includes("tiktok") || t.includes("reel") || t.includes("reels");
             if (isShort) acc.shorts.push(v);
             else acc.videos.push(v);
             return acc;
@@ -1261,66 +1296,69 @@
           categorized.shorts.sort((a, b) => new Date(b.published) - new Date(a.published));
 
           if (categorized.videos.length > 0 || categorized.shorts.length > 0) {
-            channel.videos = categorized.videos.slice(0, 10);
-            channel.shorts = categorized.shorts.slice(0, 5);
+            channel.videos = categorized.videos.slice(0, 5); // Limit to 5 for speed
+            channel.shorts = categorized.shorts.slice(0, 3);
             channel.status = "Latest uploads";
             channel.isError = false;
 
-            // Update Global Latest Scroll
-            if (channel.videos[0]) {
-              const vIdx = state.latestVideos.findIndex(v => v.channelId === channel.channelId);
-              const vData = { ...channel.videos[0], channelName: channel.name, channelId: channel.channelId };
-              if (vIdx >= 0) state.latestVideos[vIdx] = vData;
-              else state.latestVideos.push(vData);
-            }
+            // Save to Cache
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: { videos: channel.videos, shorts: channel.shorts }, ts: Date.now() }));
 
-            // Update Global Latest Shorts
-            if (channel.shorts[0]) {
-              const sIdx = state.latestShorts.findIndex(v => v.channelId === channel.channelId);
-              const sData = { ...channel.shorts[0], channelName: channel.name, channelId: channel.channelId };
-              if (sIdx >= 0) state.latestShorts[sIdx] = sData;
-              else state.latestShorts.push(sData);
-            }
-
-            state.latestVideos.sort((a, b) => new Date(b.published) - new Date(a.published));
-            state.latestShorts.sort((a, b) => new Date(b.published) - new Date(a.published));
-
-            renderLatest();
-            renderShorts();
+            updateGlobalLatest(channel);
             return;
           }
-        } catch (err) {
-          console.warn(`Proxy ${proxy.name} failed for ${channel.name}`, err);
-        }
+        } catch (err) { }
       }
 
       channel.status = "Feed unavailable";
       channel.isError = true;
       channel.videos = [];
-      renderLatest();
+      throttledRenderLatest();
+    }
+
+    function updateGlobalLatest(channel) {
+      if (channel.videos[0]) {
+        const vIdx = state.latestVideos.findIndex(v => v.channelId === channel.channelId);
+        const vData = { ...channel.videos[0], channelName: channel.name, channelId: channel.channelId };
+        if (vIdx >= 0) state.latestVideos[vIdx] = vData;
+        else state.latestVideos.push(vData);
+      }
+      if (channel.shorts[0]) {
+        const sIdx = state.latestShorts.findIndex(v => v.channelId === channel.channelId);
+        const sData = { ...channel.shorts[0], channelName: channel.name, channelId: channel.channelId };
+        if (sIdx >= 0) state.latestShorts[sIdx] = sData;
+        else state.latestShorts.push(sData);
+      }
+      state.latestVideos.sort((a, b) => new Date(b.published) - new Date(a.published));
+      state.latestShorts.sort((a, b) => new Date(b.published) - new Date(a.published));
+      throttledRenderLatest();
     }
 
     async function loadAllFeeds() {
-      const concurrency = 4;
       const queue = [...state.channels];
 
-      // Step 1: Priority Batch (Top 8 channels)
-      const priority = queue.splice(0, 8);
-      await Promise.all(priority.map(c => fetchFeed(c).then(render)));
+      // Step 1: Strict Serial Loading (Top 4 channels)
+      // These appear "above-the-fold" - load them one-by-one for instant pop-in.
+      const serialBatch = queue.splice(0, 4);
+      for (const c of serialBatch) {
+        await fetchFeed(c);
+        throttledRender();
+      }
 
-      // Step 2: Trigger Random Selection if necessary
+      // Step 2: Featured Video Priority
       if (FEATURED_VIDEO_URL === "random" && !featuredState.id) {
         pickRandomFeatured();
       }
 
-      // Step 3: Worker process for the rest
+      // Step 3: Fast Parallel worker process for the rest
+      const concurrency = 6;
       async function worker() {
         while (queue.length > 0) {
           const channel = queue.shift();
           if (!channel) break;
           await fetchFeed(channel);
-          render();
-          await new Promise(r => setTimeout(r, 300));
+          throttledRender();
+          await new Promise(r => setTimeout(r, 100)); // Minimal delay
         }
       }
 
@@ -1349,7 +1387,9 @@
                  fetchpriority="high"
                  loading="eager"
                  decoding="sync"
-                 style="display: block; image-rendering: -webkit-optimize-contrast;"
+                 width="1280"
+                 height="720"
+                 style="display: block; image-rendering: -webkit-optimize-contrast; aspect-ratio: 16 / 9;"
                  onerror="if(this.src.includes('vi_webp')){ this.src='https://i.ytimg.com/vi/${featuredState.id}/maxresdefault.jpg'; } else if(this.src.includes('maxresdefault')){ this.src='https://i.ytimg.com/vi/${featuredState.id}/sddefault.jpg'; } else if(this.src.includes('sddefault')){ this.src='https://i.ytimg.com/vi/${featuredState.id}/hqdefault.jpg'; }">
           </div>
           <div class="featured-content">
